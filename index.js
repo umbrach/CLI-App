@@ -5,7 +5,6 @@ const {
   addContact,
 } = require("./contacts");
 
-
 const { Command } = require("commander");
 const program = new Command();
 program
@@ -19,23 +18,22 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: рефакторить
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
       listContacts();
       break;
 
-      case "get":
-          getContactById(id);
+    case "get":
+      getContactById(id);
       break;
 
-      case "add":
-          addContact(name, email, phone);
+    case "add":
+      addContact(name, email, phone);
       break;
 
-      case "remove":
-          removeContact(id);
+    case "remove":
+      removeContact(id);
       break;
 
     default:
@@ -44,17 +42,3 @@ function invokeAction({ action, id, name, email, phone }) {
 }
 
 invokeAction(argv);
-
-
-
-// # Отримуємо і виводимо весь список контактів у вигляді таблиці (console.table)
-// node index.js --action="list"
-
-// # Отримуємо контакт по id
-// node index.js --action="get" --id=5
-
-// # Додаємо контакт
-// node index.js --action="add" --name="Mango" --email="mango@gmail.com" --phone="322-22-22"
-
-// # Видаляємо контакт
-// node index.js --action="remove" --id=3
